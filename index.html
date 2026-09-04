@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f4f1ea">
+  <title>Mi agenda</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow" id="today-label"></p>
+        <h1 id="app-title">Mi semana</h1>
+      </div>
+      <div class="top-actions">
+        <div class="view-switch" aria-label="Cambiar vista">
+          <button class="view-option active" data-view="week">Semana</button>
+          <button class="view-option" data-view="month">Mes</button>
+        </div>
+        <button class="icon-button" id="theme-toggle" aria-label="Cambiar tema" title="Cambiar tema">☾</button>
+      </div>
+    </header>
+
+    <section class="hero" aria-labelledby="period-title">
+      <div class="period-copy">
+        <p class="section-label" id="plan-label">PLAN SEMANAL</p>
+        <div class="period-title-row">
+          <button class="nav-button" id="previous-period" aria-label="Periodo anterior">‹</button>
+          <div>
+            <h2 id="period-title">Esta semana</h2>
+            <p id="period-range" class="muted"></p>
+          </div>
+          <button class="nav-button" id="next-period" aria-label="Periodo siguiente">›</button>
+          <button class="today-button" id="go-today">Hoy</button>
+        </div>
+      </div>
+      <div class="progress-wrap" aria-label="Progreso del periodo">
+        <div class="progress-copy"><span id="progress-text">0 de 0 listas</span><strong id="progress-percent">0%</strong></div>
+        <div class="progress-track"><div id="progress-bar" class="progress-bar"></div></div>
+      </div>
+    </section>
+
+    <section class="composer" aria-label="Agregar una tarea">
+      <form id="task-form">
+        <label class="sr-only" for="task-input">Nueva tarea</label>
+        <input id="task-input" maxlength="120" autocomplete="off" placeholder="¿Qué tienes que hacer?" required>
+        <label class="sr-only" for="day-select">Día</label>
+        <select id="day-select"></select>
+        <button class="primary-button" type="submit"><span>＋</span> Agregar</button>
+      </form>
+      <p class="selection-hint" id="selection-hint">Haz clic en un día para seleccionarlo.</p>
+    </section>
+
+    <div class="planner-layout">
+      <aside class="backlog-panel drop-zone" id="backlog-panel" aria-labelledby="backlog-title">
+        <header class="backlog-header">
+          <div>
+            <p class="section-label">BANDEJA</p>
+            <h2 id="backlog-title">Sin asignar</h2>
+          </div>
+          <span class="backlog-count" id="backlog-count">0</span>
+        </header>
+        <p class="backlog-help">Arrastra una tarea hacia un día o asígnala desde su menú.</p>
+        <ul class="task-list backlog-list" id="backlog-list"></ul>
+        <div class="backlog-empty" id="backlog-empty">
+          <span>✓</span>
+          <p>No hay tareas esperando.</p>
+        </div>
+      </aside>
+
+      <section class="calendar-area" aria-label="Calendario de tareas">
+        <div class="calendar-toolbar">
+          <nav class="filters" aria-label="Filtrar tareas">
+            <button class="filter active" data-filter="all">Todas</button>
+            <button class="filter" data-filter="pending">Pendientes</button>
+            <button class="filter" data-filter="done">Completadas</button>
+          </nav>
+          <p class="holiday-status" id="holiday-status">Calendario de feriados de Chile</p>
+        </div>
+        <div class="weekday-row" id="weekday-row" aria-hidden="true"></div>
+        <section id="calendar-grid" class="calendar-grid week-view" aria-live="polite"></section>
+      </section>
+    </div>
+
+    <footer>
+      <button id="clear-completed" class="text-button">Limpiar completadas</button>
+      <p>Los cambios se guardan automáticamente en este dispositivo.</p>
+    </footer>
+  </main>
+
+  <template id="day-template">
+    <article class="day-card drop-zone" tabindex="0">
+      <header class="day-header">
+        <div><p class="day-name"></p><h3 class="day-date"></h3></div>
+        <span class="day-count"></span>
+      </header>
+      <p class="holiday-marker" hidden></p>
+      <ul class="task-list"></ul>
+      <p class="empty-state">Sin tareas. Un pequeño descanso.</p>
+    </article>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>

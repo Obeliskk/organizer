@@ -1,0 +1,16 @@
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+
+# Variables de entorno
+.env
+.env.*
+!.env.example
+
+# Registros
+*.log
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
